@@ -92,8 +92,7 @@ class MsgReceiver extends BroadcastReceiver{
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String receiveTime = format.format(date);
                 String msg_content = "number:" + msg.getOriginatingAddress()
-                        + "   body:" + msg.getDisplayMessageBody() + "  time:"
-                        + msg.getTimestampMillis();
+                        + "   body:" + msg.getDisplayMessageBody();
                 Log.d("send",msg_content);
                 send(msg_content);
             }
@@ -119,7 +118,7 @@ class MsgReceiver extends BroadcastReceiver{
                     MimeMessage msg = new MimeMessage(session);
                     msg.setFrom(send);
                     msg.setRecipients(Message.RecipientType.TO, receive);
-                    msg.setSubject(message_l);
+                    msg.setSubject("from 5s");
                     msg.setSentDate(new Date());
                     msg.setText(message_l);
                     Log.d("send","success");
