@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     EditText passwd_e ;
     EditText recevied_e ;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +71,14 @@ class MsgReceiver extends BroadcastReceiver{
     private String send;
     private String receive;
     private String key;
+    private String smtp ;
 
     MsgReceiver(String send_mail,String passwd,String receive_mail)
     {
      send = send_mail;
      receive=receive_mail;
      key=passwd;
+     smtp = "smtp."+receive.split("@")[1];
      send("init");
     }
 
@@ -104,7 +107,7 @@ class MsgReceiver extends BroadcastReceiver{
             @Override
             public void run() {
                 Properties props = new Properties();
-                props.setProperty("mail.transport.protocol", "smtp");
+                props.setProperty("mail.transport.protocol", smtp);
                 props.put("mail.host", "smtp.126.com");
                 props.put("mail.smtp.auth", "true");
                 props.put("mail.smtp.port", "465");
@@ -118,7 +121,7 @@ class MsgReceiver extends BroadcastReceiver{
                     MimeMessage msg = new MimeMessage(session);
                     msg.setFrom(send);
                     msg.setRecipients(Message.RecipientType.TO, receive);
-                    msg.setSubject("from 5s");
+                    msg.setSubject("iPhone 5s");
                     msg.setSentDate(new Date());
                     msg.setText(message_l);
                     Log.d("send","success");
