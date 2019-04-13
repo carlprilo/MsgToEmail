@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MsgToEmail.iml" filepath="$PROJECT_DIR$/MsgToEmail.iml" />
-      <module fileurl="file://C:\Code\Android\MsgToEmail\SMStoMail.iml" filepath="C:\Code\Android\MsgToEmail\SMStoMail.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SMStoMail.iml" filepath="$PROJECT_DIR$/SMStoMail.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Code\Android\MsgToEmail\app\app.iml" filepath="C:\Code\Android\MsgToEmail\app\app.iml" />
     </modules>
   </component>
 </project>
