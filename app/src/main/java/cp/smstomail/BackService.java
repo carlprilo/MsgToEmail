@@ -65,20 +65,7 @@ public class BackService extends Service {
                             .build();
             startForeground(ONGOING_NOTIFICATION_ID, notification);
         }
-//        final Boolean running = true;
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                while (running){
-//                try {
-//                    sleep(1000);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                    }
-//                }
-//            //prepare();
-//            }
-//        }).run();
+
 
     }
 
@@ -91,8 +78,9 @@ public class BackService extends Service {
     @Override
     public void onDestroy() {
         Log.i(TAG, "-->>onDestroy");
+        stopForeground(true);
+        unregisterReceiver(msgReceiver);
         super.onDestroy();
-
     }
 
     @Override
@@ -111,6 +99,7 @@ public class BackService extends Service {
         Log.d(TAG, "prepare: "+email_s+" "+email_r);
         msgReceiver = new MsgReceiver(email_s,passwd,email_r);
         registerReceiver(msgReceiver,intentFilter);
+
     }
 
 }

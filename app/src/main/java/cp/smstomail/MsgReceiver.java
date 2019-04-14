@@ -56,6 +56,7 @@ class MsgReceiver extends BroadcastReceiver {
         }
     }
 
+
     private void send(final String message_s, final String message_c) {
         new Thread(new Runnable() {
             @Override

@@ -36,15 +36,14 @@ public class MainActivity extends AppCompatActivity {
     EditText send_e;
     EditText passwd_e ;
     EditText recevied_e ;
-    Button button_b;
-
-
+    Boolean is_running;
+    Intent serviceIntent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        is_running = false;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         button = findViewById(R.id.send_button);
-        button_b=findViewById(R.id.start_button);
         send_e = findViewById(R.id.send_email);
         passwd_e = findViewById(R.id.passwd_input);
         recevied_e = findViewById(R.id.recevied_email);
@@ -52,8 +51,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("hit", "yes");
-                //prepare();
-                beginService();
+                if (!is_running){
+                    is_running = true;
+                    button.setText("stop");
+                    beginService();
+                }else{
+                    is_running = false;
+                    button.setText("begin");
+                    stopService(serviceIntent);
+
+                }
+
             }
         });
 //        button_b.setOnClickListener(new View.OnClickListener() {
@@ -71,19 +79,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void beginService(){
         initString();
-        button.setText("change");
-        Intent intent = new Intent(this,BackService.class);
-        intent.putExtra("send_account",email_s);
-        intent.putExtra("key",passwd);
-        intent.putExtra("receive_account",email_r);
+        serviceIntent = new Intent(this,BackService.class);
+        serviceIntent.putExtra("send_account",email_s);
+        serviceIntent.putExtra("key",passwd);
+        serviceIntent.putExtra("receive_account",email_r);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
         {
-            startForegroundService(intent);
+            startForegroundService(serviceIntent);
         }else{
-            startService(intent);
+            startService(serviceIntent);
         }
     }
 
